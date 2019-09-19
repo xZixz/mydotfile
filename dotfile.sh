@@ -3,6 +3,9 @@ cd
 
 ## Set up Vim
 
+# Install vim-plug
+curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+
 VIMRC_FOLDER="$HOME/myvimrc/"
 if [[ -d $VIMRC_FOLDER ]]; then
     if [[ -d  "$VIMRC_FOLDER/.git" ]]; then
