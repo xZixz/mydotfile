@@ -24,5 +24,29 @@ else
 fi
 
 # Soft link myvimrc/.vimrc
-rm .vimrc
+rm $HOME/.vimrc
 ln -s myvimrc/.vimrc .vimrc
+
+## Setup Tmux
+
+TMUXCONF_FOLDER="$HOME/mytmuxconf/"
+if [[ -d $TMUXCONF_FOLDER ]]; then
+    # There's alrdy a tmuxconf folder
+    if [[ -d "$TMUXCONF_FOLDER/.git" ]]; then
+        # The folder is a repo alrdy, do the git pull
+        cd $TMUXCONF_FOLDER
+        git pull origin master
+        cd
+    else
+        # The folder exists but it's not a git repo, remove it then clone the repo
+        rm -r $TMUXCONF_FOLDER
+        git clone git@github.com:xZixz/mytmuxconf.git
+    fi
+else
+    # There's no tmuxconf folder, clone the repo
+    git clone git@github.com:xZixz/mytmuxconf.git
+fi
+
+# Soft link tmuxconf
+rm $HOME/.tmux.conf
+ln -s $TMUXCONF_FOLDER/.tmux.conf .tmux.conf
